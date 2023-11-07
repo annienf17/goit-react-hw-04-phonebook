@@ -3,7 +3,6 @@ import { ContactForm } from "./form/ContactForm.jsx";
 import { Filter } from "./filter/Filter.jsx";
 import { ContactList } from "./list/ContactList.jsx";
 
-
 import { nanoid } from 'nanoid';
 
 import PropTypes from 'prop-types';
@@ -11,14 +10,26 @@ import css from './App.module.css';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: ''
   };
+
+//jako pierwszą rzecz odczytujemy kontakty z localStorage i aktualizujemy stan komponentu.
+  componentDidMount() {
+    const savedContacts = localStorage.getItem('contacts');
+    if (savedContacts) {
+      this.setState({ contacts: JSON.parse(savedContacts) });
+    }
+  }
+//reagujemy na zmianę stanu `contacts` i zapisujemy kontakty w localStorage
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+/* każde dodanie lub usunięcie kontaktu będzie również aktualizować dane w localStorage. 
+Podczas ładowania aplikacji, kontakty zostaną pobrane z localStorage i załadowane do stanu komponentu.
+ */
 
   handleAddContact = newContact => {
     const { contacts } = this.state;
@@ -60,17 +71,20 @@ export class App extends Component {
     return (
       <div className={css.form__container}>
         <h1>Phonebook</h1>
-        <ContactForm onAddContact={this.handleAddContact} />
+        <ContactForm 
+        onAddContact={this.handleAddContact} 
+        />
 
         <h2>Contacts</h2>
-        <Filter filter={filter} onFilterChange={this.handleFilterChange} />
+        <Filter 
+        filter={filter} 
+        onFilterChange={this.handleFilterChange} 
+        />
 
         <ContactList
           contacts={filteredContacts}
           onDeleteContact={this.handleDelete}
         />
-        
-       
       </div>
     );
   }
