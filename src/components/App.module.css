@@ -1,0 +1,66 @@
+html {
+    font-size: 62.5%;
+}
+body {
+    font-size: 2rem;
+    line-height: 1.5;
+    padding: 50px;
+}
+.form__container {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form__container form {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #03566d;
+    padding: 20px 20px 5px 20px;
+  }
+  
+  .form__container label {
+    margin-bottom: 5px;
+    font-size: 1.6rem;
+  }
+  .form__container input {
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .form__container input,
+  .form__container button {
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #03566d;
+    border: 1px solid #03566d;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    transition: all .3s;
+  }
+
+  .form__button {
+    max-width: 150px;
+    box-shadow: 2px 3px 12px 2px rgba(0,0,0,.3);
+    font-size: 1.8rem;
+    padding: 10px 20px;
+  }
+  
+  .form__button:hover,
+  .form__button_delete:hover {
+    background-color: #fff;
+    border: 1px solid #fff;
+    color: #03566d;
+  }
+  .form__button_delete {
+    margin-left: 1rem;
+    font-size: 1.4rem;
+    box-shadow: 1px 1px 4px 1px rgba(0,0,0,.3);
+    padding: 3px 12px;
+    
+  }
+  
